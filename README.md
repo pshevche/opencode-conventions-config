@@ -49,46 +49,67 @@ until requirements are fully understood.
 
 ## Setup in other repos
 
-### 1. Install direnv
+### Prerequisites
+
+- [jq](https://jqlang.github.io/jq/download/) must be installed.
 
 ```bash
-brew install direnv
+brew install jq   # macOS
 ```
 
-Add to your shell (`~/.zshrc`):
+### 1. Clone this repo somewhere temporary
 
 ```bash
-eval "$(direnv hook zsh)"
+git clone --depth 1 https://github.com/pshevche/opencode-conventions-config.git /tmp/opencode-conventions-config
 ```
 
-### 2. Add as a git submodule
+### 2. Run the installer
+
+From the root of your target repository:
 
 ```bash
-git submodule add -n --depth 1 https://github.com/pshevche/opencode-conventions-config.git .opencode-conventions
+/tmp/opencode-conventions-config/install.sh
 ```
 
-### 3. Create `.envrc`
+Or pass the target directory explicitly:
 
 ```bash
-export OPENCODE_CONFIG_DIR="$PWD/.opencode-conventions"
+/tmp/opencode-conventions-config/install.sh /path/to/your/repo
 ```
 
-Then allow it:
+The script will:
+
+1. Copy `.opencode/instructions/`, `.opencode/prompts/`, and `.opencode/skills/`
+   into your repo, creating any missing directories.
+2. Merge `opencode.json` into your repo's `opencode.json`:
+   - **Your values win** on scalar fields (`model`, `small_model`, …).
+   - **Arrays** (`plugin`, `instructions`) are unioned — no duplicates.
+   - **`agent` map** — your agent entries win; missing agents are added from
+     the conventions config.
+   - **`permission` map** — your entries win; missing keys are filled in.
+
+### 3. Review and commit
 
 ```bash
-direnv allow
+git diff
+git add opencode.json .opencode/
+git commit -m "chore: add opencode conventions config"
 ```
 
-### 4. Keep up to date
+### Keeping up to date
+
+Re-run the installer whenever you want to pull in the latest conventions:
 
 ```bash
-git submodule update --init --recursive
+git clone --depth 1 https://github.com/pshevche/opencode-conventions-config.git /tmp/opencode-conventions-config
+/tmp/opencode-conventions-config/install.sh
 ```
 
 ---
 
 ## Notes
 
-- Permissions and LSP config should remain repo-specific.
-- `OPENCODE_CONFIG_DIR` is loaded after local project config, so repo-specific
-  settings take precedence.
+- Permissions and LSP config should remain repo-specific — the installer will
+  not overwrite keys you already have in `opencode.json`.
+- Agent prompts are copied verbatim; edit them in your repo after installation
+  if you need project-specific tweaks.
