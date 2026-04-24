@@ -2,19 +2,52 @@
 
 Shared OpenCode configuration for use across multiple repositories.
 
-## Included
+## What's included
 
-- **Plugins**:
-  - `superpowers` - Brainstorming and other AI-powered workflows
+### Plugin
 
-- **Skills**:
-  - `gh-issue` - Hand off GitHub issues to OpenCode agents
-  - `grill-me` - Interview the user about plans/designs until shared understanding
+- **superpowers** (`obra/superpowers`) — Injects brainstorming workflows and
+  registers the superpowers skill library into every session.
 
-- **Instructions**:
-  - Conventional Commits documentation
+### Agents
 
-## Setup in Other Repos
+| Agent | Invoke as | Model | Role |
+|---|---|---|---|
+| Architect | `@plan` | Claude Sonnet 4.6 | Planning, task breakdown, delegation, final review |
+| Implementer | `@build` | Kimi K2.6 | Writing and editing code |
+| QA | `@qa` | Kimi K2.5 | Writing tests, analysing failures |
+| Reviewer | `@reviewer` | MiniMax M2.5 Free | Code review, PR descriptions |
+| Fast loop | `@fast-loop` | Nemotron 3 Super Free | Renames, formatting, repetitive edits |
+
+Agent prompts live in `.opencode/prompts/`.
+
+The Architect (`@plan`) runs the **grill-me** interview protocol before
+producing any plan — asking one question at a time with a recommended answer
+until requirements are fully understood.
+
+### Skills
+
+- **grill-me** — Interview the user relentlessly about a plan until reaching
+  shared understanding. Loaded automatically by `@plan`; also available
+  on-demand.
+- **gh-issue** — Hand off GitHub issues to OpenCode agents.
+
+### Instructions
+
+- **Conventional Commits** — Commit message format and type reference,
+  applied to every session.
+
+### Global permissions
+
+- All operations default to `ask`.
+- `read` and safe `git` inspection commands (`status`, `log`, `diff`, `show`)
+  are pre-approved.
+- Agent-level overrides tighten or loosen per role (e.g. `plan` cannot
+  write or edit files; `build` has full write access).
+
+---
+
+## Setup in other repos
 
 ### 1. Install direnv
 
@@ -28,45 +61,37 @@ Add to your shell (`~/.zshrc`):
 eval "$(direnv hook zsh)"
 ```
 
-### 2. Add as git submodule
+### 2. Add as a git submodule
 
 ```bash
 git submodule add -n --depth 1 https://github.com/pshevche/opencode-conventions-config.git .opencode-conventions
 ```
 
-### 3. Create .envrc
-
-Create `.envrc` in the project root:
+### 3. Create `.envrc`
 
 ```bash
 export OPENCODE_CONFIG_DIR="$PWD/.opencode-conventions"
 ```
 
-Then run:
+Then allow it:
 
 ```bash
 direnv allow
 ```
 
-### 4. Update repos as needed
+### 4. Keep up to date
 
 ```bash
 git submodule update --init --recursive
 ```
 
-## Development
-
-To update skills:
-
-```bash
-# Fetch grill-me from mattpocock/skills
-# Update .opencode/skills/grill-me/SKILL.md
-
-# gh-issue skill is project-agnostic - update from here
-```
+---
 
 ## Notes
 
-- Permissions and LSP config should be repo-specific
-- The `OPENCODE_CONFIG_DIR` is loaded after local project config, so repo-specific settings take precedence
-- Plugins are loaded from this config automatically when OPENCODE_CONFIG_DIR is set
+- Permissions and LSP config should remain repo-specific.
+- `OPENCODE_CONFIG_DIR` is loaded after local project config, so repo-specific
+  settings take precedence.
+- Free-tier agents (`@reviewer`, `@fast-loop`) should not receive proprietary
+  business logic or internal API keys — use `@build` or `@qa` instead.
+- Build/test commands in `AGENTS.md` default to Gradle; update them per project.
