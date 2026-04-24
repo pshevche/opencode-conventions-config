@@ -65,7 +65,8 @@
           "git add *": "allow",
           "git commit *": "allow",
           "git push *": "allow",
-          "mkdir *": "allow"
+          "mkdir *": "allow",
+          "rm *": "allow"
         }
       }
     },
@@ -91,7 +92,8 @@
           "git add *": "allow",
           "git commit *": "allow",
           "git push *": "allow",
-          "mkdir *": "allow"
+          "mkdir *": "allow",
+          "rm *": "allow"
         }
       }
     },
