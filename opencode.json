@@ -8,33 +8,6 @@
   ],
   "model": "opencode/kimi-k2.6",
   "small_model": "opencode/qwen3.5-plus",
-  "permission": {
-    "*": "ask",
-    "read": "allow",
-    "glob": "allow",
-    "grep": "allow",
-    "lsp": "allow",
-    "webfetch": "allow",
-    "websearch": "allow",
-    "codesearch": "allow",
-    "skill": {
-      "gh-issue": "allow",
-      "grill-me": "allow",
-      "systematic-debugging": "allow",
-      "todowrite": "allow"
-    },
-    "bash": {
-      "git branch *": "allow",
-      "git diff *": "allow",
-      "git show *": "allow",
-      "git status": "allow",
-      "cat *": "allow",
-      "find *": "allow",
-      "head *": "allow",
-      "ls *": "allow",
-      "tail *": "allow"
-    }
-  },
   "agent": {
     "plan": {
       "model": "opencode/claude-sonnet-4-6",
@@ -48,54 +21,14 @@
       "description": "Implementer: executes concrete coding tasks across the repo — writing, editing, and running code. Always reads existing patterns via explore before writing anything new.",
       "prompt": "{file:.opencode/prompts/build.txt}",
       "temperature": 0.1,
-      "steps": 80,
-      "permission": {
-        "edit": "allow",
-        "bash": {
-          "git branch *": "allow",
-          "git diff *": "allow",
-          "git show *": "allow",
-          "git status": "allow",
-          "cat *": "allow",
-          "find *": "allow",
-          "head *": "allow",
-          "ls *": "allow",
-          "tail *": "allow",
-          // additional permissions
-          "git add *": "allow",
-          "git commit *": "allow",
-          "git push *": "allow",
-          "mkdir *": "allow",
-          "rm *": "allow"
-        }
-      }
+      "steps": 80
     },
     "qa": {
       "model": "opencode/kimi-k2.5",
       "description": "QA: writes tests, analyses test failures, and produces test plans. Use when code needs coverage or a test failure needs root cause analysis.",
       "prompt": "{file:.opencode/prompts/qa.txt}",
       "temperature": 0.1,
-      "steps": 60,
-      "permission": {
-        "edit": "allow",
-        "bash": {
-          "git branch *": "allow",
-          "git diff *": "allow",
-          "git show *": "allow",
-          "git status": "allow",
-          "cat *": "allow",
-          "find *": "allow",
-          "head *": "allow",
-          "ls *": "allow",
-          "tail *": "allow",
-          // additional permissions
-          "git add *": "allow",
-          "git commit *": "allow",
-          "git push *": "allow",
-          "mkdir *": "allow",
-          "rm *": "allow"
-        }
-      }
+      "steps": 60
     },
     "reviewer": {
       "model": "opencode/minimax-m2.5-free",
