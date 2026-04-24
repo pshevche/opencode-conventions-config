@@ -82,14 +82,14 @@
     },
     "reviewer": {
       "model": "opencode/minimax-m2.5-free",
-      "description": "Reviewer: code review and PR descriptions. Free tier — do not send proprietary business logic or internal API keys.",
+      "description": "Reviewer: code review and PR descriptions.",
       "prompt": "{file:.opencode/prompts/reviewer.txt}",
       "temperature": 0.2,
       "steps": 30
     },
     "fast-loop": {
       "model": "opencode/nemotron-3-super-free",
-      "description": "Fast loop: renames, formatting, repetitive edits. Free tier — do not send proprietary business logic or internal API keys.",
+      "description": "Fast loop: renames, formatting, repetitive edits.",
       "prompt": "{file:.opencode/prompts/fast-loop.txt}",
       "temperature": 0.1,
       "steps": 20

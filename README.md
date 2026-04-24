@@ -92,6 +92,3 @@ git submodule update --init --recursive
 - Permissions and LSP config should remain repo-specific.
 - `OPENCODE_CONFIG_DIR` is loaded after local project config, so repo-specific
   settings take precedence.
-- Free-tier agents (`@reviewer`, `@fast-loop`) should not receive proprietary
-  business logic or internal API keys — use `@build` or `@qa` instead.
-- Build/test commands default to Gradle; update them per project in your local config.
