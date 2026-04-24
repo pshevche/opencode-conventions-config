@@ -9,6 +9,27 @@
   "model": "opencode/kimi-k2.6",
   "small_model": "opencode/qwen3.5-plus",
   "permission": {
+    "read": "allow",
+    "glob": "allow",
+    "grep": "allow",
+    "lsp": "allow",
+    "webfetch": "allow",
+    "websearch": "allow",
+    "codesearch": "allow",
+    "skill": {
+      "gh-issue": "allow",
+      "grill-me": "allow",
+      "systematic-debugging": "allow"
+    },
+    "bash": {
+      "git branch *": "allow",
+      "git diff *": "allow",
+      "git show *": "allow",
+      "head *": "allow",
+      "tail *": "allow",
+      "ls *": "allow",
+      "cat *": "allow"
+    },
     "*": "ask",
   },
   "agent": {
