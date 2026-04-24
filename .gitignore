@@ -1,0 +1,3 @@
+# OpenCode conventions config
+
+.gitignore is intentionally minimal since this repo is meant to be added as a submodule
