@@ -94,4 +94,4 @@ git submodule update --init --recursive
   settings take precedence.
 - Free-tier agents (`@reviewer`, `@fast-loop`) should not receive proprietary
   business logic or internal API keys — use `@build` or `@qa` instead.
-- Build/test commands in `AGENTS.md` default to Gradle; update them per project.
+- Build/test commands default to Gradle; update them per project in your local config.
