@@ -28,10 +28,11 @@
       "git diff *": "allow",
       "git show *": "allow",
       "git status": "allow",
+      "cat *": "allow",
+      "find *": "allow",
       "head *": "allow",
-      "tail *": "allow",
       "ls *": "allow",
-      "cat *": "allow"
+      "tail *": "allow"
     }
   },
   "agent": {
@@ -51,17 +52,20 @@
       "permission": {
         "edit": "allow",
         "bash": {
-          "git add *": "allow",
           "git branch *": "allow",
-          "git commit *": "allow",
           "git diff *": "allow",
-          "git push *": "allow",
           "git show *": "allow",
-          "git status *": "allow",
+          "git status": "allow",
+          "cat *": "allow",
+          "find *": "allow",
           "head *": "allow",
-          "tail *": "allow",
           "ls *": "allow",
-          "cat *": "allow"
+          "tail *": "allow",
+          // additional permissions
+          "git add *": "allow",
+          "git commit *": "allow",
+          "git push *": "allow",
+          "mkdir *": "allow"
         }
       }
     },
@@ -74,17 +78,20 @@
       "permission": {
         "edit": "allow",
         "bash": {
-          "git add *": "allow",
           "git branch *": "allow",
-          "git commit *": "allow",
           "git diff *": "allow",
-          "git push *": "allow",
           "git show *": "allow",
-          "git status *": "allow",
+          "git status": "allow",
+          "cat *": "allow",
+          "find *": "allow",
           "head *": "allow",
-          "tail *": "allow",
           "ls *": "allow",
-          "cat *": "allow"
+          "tail *": "allow",
+          // additional permissions
+          "git add *": "allow",
+          "git commit *": "allow",
+          "git push *": "allow",
+          "mkdir *": "allow"
         }
       }
     },
